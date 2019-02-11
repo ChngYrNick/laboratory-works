@@ -1,0 +1,19 @@
+@import "./styles/global";
+
+@import "./styles/grid";
+@import "./styles/links";
+@import "./styles/reset";
+@import "./styles/typography";
+
+html {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  color: $text-color;
+  background-color: $bg-color;
+}
