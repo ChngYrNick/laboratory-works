@@ -10,24 +10,28 @@ export default ({ matrix, update }) => {
 
   return (
     <div>
-      {matrix.map((column, i) => {
-        return (
-          <tr>
-            {column.map((row, j) => {
-              return (
-                <td>
-                  <input
-                    className="input"
-                    value={row}
-                    type="text"
-                    onChange={e => handleChange(i, j, e)}
-                  />
-                </td>
-              );
-            })}
-          </tr>
-        );
-      })}
+      <table>
+        <tbody>
+          {matrix.map((column, i) => {
+            return (
+              <tr key={i}>
+                {column.map((row, j) => {
+                  return (
+                    <td key={j}>
+                      <input
+                        className="input"
+                        value={row}
+                        type="text"
+                        onChange={e => handleChange(i, j, e)}
+                      />
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

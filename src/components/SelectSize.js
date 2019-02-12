@@ -43,14 +43,22 @@ export default ({ update, matrix }) => {
           className="select"
         >
           {options.map(item => {
-            return <option value={item}>{item}</option>;
+            return (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            );
           })}
         </select>
       </div>
       <div>
         <select value={rows} onChange={handleRowsChange} className="select">
           {options.map(item => {
-            return <option value={item}>{item}</option>;
+            return (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            );
           })}
         </select>
       </div>
