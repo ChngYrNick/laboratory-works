@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AddSubMatrices from "./AddSubMatrices";
 
 import "./Page.scss";
 
@@ -11,7 +12,7 @@ class Page extends Component {
 
   renderButtons = () => {
     const events = [
-      "Складання матриць",
+      "Cкладання/Віднімання матриць",
       "Множення матриці на скаляр",
       "Множення матриць",
       "Транспонування матриці",
@@ -28,7 +29,12 @@ class Page extends Component {
   };
 
   render() {
-    return <div className="page">{this.renderButtons()}</div>;
+    return (
+      <div className="page">
+        {this.renderButtons()}
+        <AddSubMatrices />
+      </div>
+    );
   }
 }
 
