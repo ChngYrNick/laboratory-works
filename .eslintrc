@@ -11,10 +11,11 @@
     "no-console": [0],
     "no-use-before-define": [0],
     "react/jsx-one-expression-per-line": [0],
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": ["error", "windows"],
     "arrow-body-style": 0,
     "react/no-array-index-key": 0,
-    "react/button-has-type": 0
+    "react/button-has-type": 0,
+    "no-alert": 0
   },
   "env": {
     "browser": true

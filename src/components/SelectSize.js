@@ -1,4 +1,5 @@
 import React from "react";
+import "./SelectSize.scss";
 
 export default ({ update, matrix }) => {
   const options = [2, 3, 4, 5, 6, 7];
@@ -35,7 +36,7 @@ export default ({ update, matrix }) => {
   };
 
   return (
-    <div>
+    <div className="size-selector">
       <div>
         <select
           value={columns}

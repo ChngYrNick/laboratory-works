@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import SelectSize from "./SelectSize";
-import SelectOperation from "./ SelectOperation";
 import Matrix from "./Matrix";
-import "./AddSubMatrices.scss";
+import "./MatricesMult.scss";
+import { InverseMatrix, Determinant } from "../functions/matrixOperations";
 
-class AddSubMatrices extends Component {
+class InvertibleMatrix extends Component {
   constructor(props) {
     super(props);
     const columns = 3;
@@ -14,15 +14,12 @@ class AddSubMatrices extends Component {
       new Array(columns).fill(0).map(() => new Array(rows).fill(0));
     this.state = {
       matrixA: newMatrix(),
-      matrixB: newMatrix(),
-      matrixC: newMatrix(),
-      operation: "+"
+      matrixB: newMatrix()
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleMatrixAChange = this.handleMatrixAChange.bind(this);
     this.handleMatrixBChange = this.handleMatrixBChange.bind(this);
-    this.handleMatrixCChange = this.handleMatrixCChange.bind(this);
     this.performOperation = this.performOperation.bind(this);
   }
 
@@ -34,28 +31,26 @@ class AddSubMatrices extends Component {
     this.setState({ matrixB: matrix });
   }
 
-  handleMatrixCChange(matrix) {
-    this.setState({ matrixC: matrix });
-  }
-
   handleChange(config) {
     this.setState(config);
   }
 
   performOperation() {
-    const { matrixA, matrixB, operation } = this.state;
-    let newMatrix;
-    if (operation === "+") {
-      newMatrix = matrixA.map((column, i) =>
-        column.map((row, j) => Number(row) + Number(matrixB[i][j]))
-      );
+    const { matrixA } = this.state;
+    if (matrixA.length !== matrixA[0].length) {
+      alert("Matrix isn't square!");
+      return;
     }
-    if (operation === "-") {
-      newMatrix = matrixA.map((column, i) =>
-        column.map((row, j) => Number(row) - Number(matrixB[i][j]))
+    if (!Determinant(matrixA)) {
+      alert(
+        "The inverse matrix cannot be found, since the determinant is zero"
       );
+      return;
     }
-    this.handleChange({ matrixC: newMatrix });
+    let newMatrix = matrixA.map(column => column.map(raw => Number(raw)));
+    newMatrix = InverseMatrix(newMatrix);
+    newMatrix = newMatrix.map(column => column.map(raw => raw.toFixed(1)));
+    this.handleChange({ matrixB: newMatrix });
   }
 
   renderButton() {
@@ -67,23 +62,20 @@ class AddSubMatrices extends Component {
   }
 
   render() {
-    const { matrixA, matrixB, matrixC, operation } = this.state;
+    const { matrixA, matrixB } = this.state;
     return (
       <div className="content">
         <div className="toolbar">
           <SelectSize update={this.handleChange} matrix={matrixA} />
-          <SelectOperation update={this.handleChange} option={operation} />
         </div>
         <div className="matrices">
           <Matrix matrix={matrixA} update={this.handleMatrixAChange} />
-          <div>{operation}</div>
-          <Matrix matrix={matrixB} update={this.handleMatrixBChange} />
           {this.renderButton()}
-          <Matrix matrix={matrixC} update={this.handleMatrixCChange} />
+          <Matrix matrix={matrixB} update={this.handleMatrixBChange} />
         </div>
       </div>
     );
   }
 }
 
-export default AddSubMatrices;
+export default InvertibleMatrix;

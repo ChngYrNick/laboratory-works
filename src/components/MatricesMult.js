@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import SelectSize from "./SelectSize";
-import SelectOperation from "./ SelectOperation";
 import Matrix from "./Matrix";
-import "./AddSubMatrices.scss";
+import "./MatricesMult.scss";
 
-class AddSubMatrices extends Component {
+class MatricesMult extends Component {
   constructor(props) {
     super(props);
     const columns = 3;
@@ -15,8 +14,7 @@ class AddSubMatrices extends Component {
     this.state = {
       matrixA: newMatrix(),
       matrixB: newMatrix(),
-      matrixC: newMatrix(),
-      operation: "+"
+      matrixC: newMatrix()
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,18 +41,10 @@ class AddSubMatrices extends Component {
   }
 
   performOperation() {
-    const { matrixA, matrixB, operation } = this.state;
-    let newMatrix;
-    if (operation === "+") {
-      newMatrix = matrixA.map((column, i) =>
-        column.map((row, j) => Number(row) + Number(matrixB[i][j]))
-      );
-    }
-    if (operation === "-") {
-      newMatrix = matrixA.map((column, i) =>
-        column.map((row, j) => Number(row) - Number(matrixB[i][j]))
-      );
-    }
+    const { matrixA, matrixB } = this.state;
+    const newMatrix = matrixA.map((column, i) =>
+      column.map((row, j) => Number(row) * Number(matrixB[i][j]))
+    );
     this.handleChange({ matrixC: newMatrix });
   }
 
@@ -67,16 +57,15 @@ class AddSubMatrices extends Component {
   }
 
   render() {
-    const { matrixA, matrixB, matrixC, operation } = this.state;
+    const { matrixA, matrixB, matrixC } = this.state;
     return (
       <div className="content">
         <div className="toolbar">
           <SelectSize update={this.handleChange} matrix={matrixA} />
-          <SelectOperation update={this.handleChange} option={operation} />
         </div>
         <div className="matrices">
           <Matrix matrix={matrixA} update={this.handleMatrixAChange} />
-          <div>{operation}</div>
+          <div>X</div>
           <Matrix matrix={matrixB} update={this.handleMatrixBChange} />
           {this.renderButton()}
           <Matrix matrix={matrixC} update={this.handleMatrixCChange} />
@@ -86,4 +75,4 @@ class AddSubMatrices extends Component {
   }
 }
 
-export default AddSubMatrices;
+export default MatricesMult;

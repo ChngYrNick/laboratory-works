@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import SelectSize from "./SelectSize";
-import SelectOperation from "./ SelectOperation";
 import Matrix from "./Matrix";
-import "./AddSubMatrices.scss";
+import "./ScalarMultiplication.scss";
 
-class AddSubMatrices extends Component {
+class ScalarMultiplication extends Component {
   constructor(props) {
     super(props);
     const columns = 3;
@@ -15,14 +14,12 @@ class AddSubMatrices extends Component {
     this.state = {
       matrixA: newMatrix(),
       matrixB: newMatrix(),
-      matrixC: newMatrix(),
-      operation: "+"
+      scalar: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleMatrixAChange = this.handleMatrixAChange.bind(this);
     this.handleMatrixBChange = this.handleMatrixBChange.bind(this);
-    this.handleMatrixCChange = this.handleMatrixCChange.bind(this);
     this.performOperation = this.performOperation.bind(this);
   }
 
@@ -34,28 +31,15 @@ class AddSubMatrices extends Component {
     this.setState({ matrixB: matrix });
   }
 
-  handleMatrixCChange(matrix) {
-    this.setState({ matrixC: matrix });
-  }
-
   handleChange(config) {
     this.setState(config);
   }
 
   performOperation() {
-    const { matrixA, matrixB, operation } = this.state;
-    let newMatrix;
-    if (operation === "+") {
-      newMatrix = matrixA.map((column, i) =>
-        column.map((row, j) => Number(row) + Number(matrixB[i][j]))
-      );
-    }
-    if (operation === "-") {
-      newMatrix = matrixA.map((column, i) =>
-        column.map((row, j) => Number(row) - Number(matrixB[i][j]))
-      );
-    }
-    this.handleChange({ matrixC: newMatrix });
+    const { matrixA, scalar } = this.state;
+    let newMatrix = matrixA.map(column => column.map(raw => Number(raw)));
+    newMatrix = newMatrix.map(column => column.map(row => row * scalar));
+    this.handleChange({ matrixB: newMatrix });
   }
 
   renderButton() {
@@ -67,23 +51,31 @@ class AddSubMatrices extends Component {
   }
 
   render() {
-    const { matrixA, matrixB, matrixC, operation } = this.state;
+    const { matrixA, matrixB, scalar } = this.state;
     return (
       <div className="content">
         <div className="toolbar">
           <SelectSize update={this.handleChange} matrix={matrixA} />
-          <SelectOperation update={this.handleChange} option={operation} />
         </div>
         <div className="matrices">
           <Matrix matrix={matrixA} update={this.handleMatrixAChange} />
-          <div>{operation}</div>
-          <Matrix matrix={matrixB} update={this.handleMatrixBChange} />
+          <div>X</div>
+          <input
+            className="scalar-input"
+            value={scalar}
+            type="text"
+            maxLength="8"
+            onChange={e => {
+              const value = e.target.value.toString();
+              return this.handleChange({ scalar: value });
+            }}
+          />
           {this.renderButton()}
-          <Matrix matrix={matrixC} update={this.handleMatrixCChange} />
+          <Matrix matrix={matrixB} update={this.handleMatrixBChange} />
         </div>
       </div>
     );
   }
 }
 
-export default AddSubMatrices;
+export default ScalarMultiplication;

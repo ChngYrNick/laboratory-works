@@ -1,0 +1,26 @@
+@import "../styles/global";
+
+.content {
+  .matrices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .toolbar {
+    display: flex;
+    justify-content: center;
+  }
+  .btn-submit {
+    height: 20px;
+    width: 40px;
+  }
+  .scalar-input {
+    background-color: white;
+    text-align: center;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+    width: 80px;
+    height: 40px;
+    margin: $free-space;
+  }
+}
