@@ -4,18 +4,21 @@ var _commander = _interopRequireDefault(require("commander"));
 
 var _divideMethod = _interopRequireDefault(require("./functions/divideMethod"));
 
+var _newtonMethod = _interopRequireDefault(require("./functions/newtonMethod"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+_commander.default.version("0.0.1").description("Application for solving nonlinear equations").option("-d, --divide-method", "Divide method").option("-n, --newton-method", "Newthon method") // eslint-disable-next-line
+.parse(process.argv);
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+if (_commander.default.divideMethod) {
+  console.log("---- Half division ----");
+  console.log("Standart = ".concat(_divideMethod.default.normal(-2, -1, 0.000001)));
+  console.log("Recursive = ".concat(_divideMethod.default.recursive(-2, -1, 0.000001)));
+  console.log("Recursive with memoization = ".concat(_divideMethod.default.memoizedRecursive(-2, -1, 0.000001)));
+}
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-_commander.default.version("0.0.1").description("Application for solving nonlinear equations").option("-d, --divide-method", "Divide method").parse(process.argv);
-
-if (_commander.default.divideMethod) root = _divideMethod.default.apply(void 0, _toConsumableArray(_commander.default.args));
-console.log("---- results ----");
-console.log((0, _divideMethod.default)(-2, -1, 0.01));
+if (_commander.default.newtonMethod) {
+  console.log("-------- Newton --------");
+  console.log((0, _newtonMethod.default)(-2, 0.000001));
+}
