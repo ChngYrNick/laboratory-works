@@ -1,31 +1,17 @@
 import program from "commander";
-import divideMethod from "./functions/divideMethod";
-import newtonMethod from "./functions/newtonMethod";
+import gaussMethod from "./functions/gaussMethod";
 
 program
   .version("0.0.1")
   .description("Application for solving nonlinear equations")
-  .option("-d, --divide-method", "Divide method")
-  .option("-n, --newton-method", "Newthon method")
+  .option("-g, --gauss-method", "Divide method")
   // eslint-disable-next-line
   .parse(process.argv);
 
-if (program.divideMethod) {
-  console.log("---- Half division ----");
+const a = [[2, -1, 1, 3], [1, 1, -1, -4], [3, -1, 1, 1], [1, -3, 0, 3]];
 
-  console.log(`Standart = ${divideMethod.normal(-2, -1, 0.000001)}`);
-  console.log(`Recursive = ${divideMethod.recursive(-2, -1, 0.000001)}`);
-  console.log(
-    `Recursive with memoization = ${divideMethod.memoizedRecursive(
-      -2,
-      -1,
-      0.000001
-    )}`
-  );
-}
+const y = [-1, 6, 4, -5];
 
-if (program.newtonMethod) {
-  console.log("-------- Newton --------");
-
-  console.log(newtonMethod(-2, 0.000001));
+if (program.gaussMethod) {
+  console.table(gaussMethod(a, y, a.length));
 }

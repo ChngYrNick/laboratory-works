@@ -2,23 +2,16 @@
 
 var _commander = _interopRequireDefault(require("commander"));
 
-var _divideMethod = _interopRequireDefault(require("./functions/divideMethod"));
-
-var _newtonMethod = _interopRequireDefault(require("./functions/newtonMethod"));
+var _gaussMethod = _interopRequireDefault(require("./functions/gaussMethod"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_commander.default.version("0.0.1").description("Application for solving nonlinear equations").option("-d, --divide-method", "Divide method").option("-n, --newton-method", "Newthon method") // eslint-disable-next-line
+_commander.default.version("0.0.1").description("Application for solving nonlinear equations").option("-g, --gauss-method", "Divide method") // eslint-disable-next-line
 .parse(process.argv);
 
-if (_commander.default.divideMethod) {
-  console.log("---- Half division ----");
-  console.log("Standart = ".concat(_divideMethod.default.normal(-2, -1, 0.000001)));
-  console.log("Recursive = ".concat(_divideMethod.default.recursive(-2, -1, 0.000001)));
-  console.log("Recursive with memoization = ".concat(_divideMethod.default.memoizedRecursive(-2, -1, 0.000001)));
-}
+var a = [[2, -1, 1, 3], [1, 1, -1, -4], [3, -1, 1, 1], [1, -3, 0, 3]];
+var y = [-1, 6, 4, -5];
 
-if (_commander.default.newtonMethod) {
-  console.log("-------- Newton --------");
-  console.log((0, _newtonMethod.default)(-2, 0.000001));
+if (_commander.default.gaussMethod) {
+  console.table((0, _gaussMethod.default)(a, y, a.length));
 }
