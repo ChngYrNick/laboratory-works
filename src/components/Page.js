@@ -63,7 +63,9 @@ class Page extends Component {
   render() {
     return (
       <div>
-        <div className="main">{this.renderComponent()}</div>
+        <div className="main">
+          <div>{this.renderComponent()}</div>
+        </div>
         <div className="footer">{this.renderButtons()}</div>
       </div>
     );

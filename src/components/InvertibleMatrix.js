@@ -48,8 +48,9 @@ class InvertibleMatrix extends Component {
       return;
     }
     let newMatrix = matrixA.map(column => column.map(raw => Number(raw)));
-    newMatrix = InverseMatrix(newMatrix);
-    newMatrix = newMatrix.map(column => column.map(raw => raw.toFixed(1)));
+    newMatrix = InverseMatrix(newMatrix).map(column =>
+      column.map(raw => Math.round(raw * 100) / 100)
+    );
     this.handleChange({ matrixB: newMatrix });
   }
 

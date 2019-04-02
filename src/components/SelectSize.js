@@ -7,21 +7,16 @@ export default ({ update, matrix }) => {
   const rows = matrix[0].length;
 
   const resetMatrix = (newRows, newColumns) => {
-    let newMatrix;
-    if (!newColumns) {
-      newMatrix = new Array(columns)
-        .fill(0)
-        .map(() => new Array(newRows).fill(0));
-    }
-    if (!newRows) {
-      newMatrix = new Array(newColumns)
-        .fill(0)
-        .map(() => new Array(rows).fill(0));
-    }
+    const newMatrix = () => {
+      if (!newRows) {
+        return new Array(newColumns).fill(0).map(() => new Array(rows).fill(0));
+      }
+      return new Array(columns).fill(0).map(() => new Array(newRows).fill(0));
+    };
     update({
-      matrixA: newMatrix,
-      matrixB: newMatrix,
-      matrixC: newMatrix
+      matrixA: newMatrix(),
+      matrixB: newMatrix(),
+      matrixC: newMatrix()
     });
   };
 
