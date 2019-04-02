@@ -10,8 +10,8 @@ _commander.default.version("0.0.1").description("Application for solving nonline
 .parse(process.argv);
 
 var a = [[2, -1, 1, 3], [1, 1, -1, -4], [3, -1, 1, 1], [1, -3, 0, 3]];
-var y = [-1, 6, 4, -5];
+var C = [-1, 6, 4, -5];
 
 if (_commander.default.gaussMethod) {
-  console.table((0, _gaussMethod.default)(a, y, a.length));
+  console.table((0, _gaussMethod.default)(a, C, a.length));
 }

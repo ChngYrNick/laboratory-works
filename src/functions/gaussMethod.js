@@ -1,4 +1,4 @@
-const gaussMethod = (a, y, n) => {
+const gaussMethod = (a, C, n) => {
   let x,
     max,
     index,
@@ -25,26 +25,26 @@ const gaussMethod = (a, y, n) => {
       a[k][j] = a[index][j];
       a[index][j] = temp;
     }
-    let temp = y[k];
-    y[k] = y[index];
-    y[index] = temp;
+    let temp = C[k];
+    C[k] = C[index];
+    C[index] = temp;
     // Нормализация уравнений
     for (let i = k; i < n; i++) {
       let temp = a[i][k];
       if (Math.abs(temp) < eps) continue; // для нулевого коэффициента пропустить
       for (let j = 0; j < n; j++) a[i][j] = a[i][j] / temp;
-      y[i] = y[i] / temp;
+      C[i] = C[i] / temp;
       if (i == k) continue; // уравнение не вычитать само из себя
       for (let j = 0; j < n; j++) a[i][j] = a[i][j] - a[k][j];
-      y[i] = y[i] - y[k];
+      C[i] = C[i] - C[k];
     }
     k++;
   }
   // обратная подстановка
 
   for (k = n - 1; k >= 0; k--) {
-    x[k] = y[k];
-    for (let i = 0; i < k; i++) y[i] = y[i] - a[i][k] * x[k];
+    x[k] = C[k];
+    for (let i = 0; i < k; i++) C[i] = C[i] - a[i][k] * x[k];
   }
   return x;
 };

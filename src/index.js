@@ -10,8 +10,8 @@ program
 
 const a = [[2, -1, 1, 3], [1, 1, -1, -4], [3, -1, 1, 1], [1, -3, 0, 3]];
 
-const y = [-1, 6, 4, -5];
+const C = [-1, 6, 4, -5];
 
 if (program.gaussMethod) {
-  console.table(gaussMethod(a, y, a.length));
+  console.table(gaussMethod(a, C, a.length));
 }

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var gaussMethod = function gaussMethod(a, y, n) {
+var gaussMethod = function gaussMethod(a, C, n) {
   var x,
       max,
       index,
@@ -34,9 +34,9 @@ var gaussMethod = function gaussMethod(a, y, n) {
       a[index][j] = _temp;
     }
 
-    var temp = y[k];
-    y[k] = y[index];
-    y[index] = temp; // Нормализация уравнений
+    var temp = C[k];
+    C[k] = C[index];
+    C[index] = temp; // Нормализация уравнений
 
     for (var _i = k; _i < n; _i++) {
       var _temp2 = a[_i][k];
@@ -46,14 +46,14 @@ var gaussMethod = function gaussMethod(a, y, n) {
         a[_i][_j] = a[_i][_j] / _temp2;
       }
 
-      y[_i] = y[_i] / _temp2;
+      C[_i] = C[_i] / _temp2;
       if (_i == k) continue; // уравнение не вычитать само из себя
 
       for (var _j2 = 0; _j2 < n; _j2++) {
         a[_i][_j2] = a[_i][_j2] - a[k][_j2];
       }
 
-      y[_i] = y[_i] - y[k];
+      C[_i] = C[_i] - C[k];
     }
 
     k++;
@@ -61,10 +61,10 @@ var gaussMethod = function gaussMethod(a, y, n) {
 
 
   for (k = n - 1; k >= 0; k--) {
-    x[k] = y[k];
+    x[k] = C[k];
 
     for (var _i2 = 0; _i2 < k; _i2++) {
-      y[_i2] = y[_i2] - a[_i2][k] * x[k];
+      C[_i2] = C[_i2] - a[_i2][k] * x[k];
     }
   }
 
