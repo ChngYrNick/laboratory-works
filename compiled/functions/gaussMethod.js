@@ -1,75 +1,30 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+var f = require("./f.js");
 
-var gaussMethod = function gaussMethod(a, C, n) {
-  var x,
-      max,
-      index,
-      k = 0;
-  var eps = 0.00001;
-  x = new Array(n);
+var N = 100;
+var n = 3;
 
-  while (k < n) {
-    // Поиск строки с максимальным a[i][k]
-    max = Math.abs(a[k][k]);
-    index = k;
+module.exports = function (a, b) {
+  var Xi = [-0.7745967, 0, 0.7745967];
+  var Ci = [0.5555556, 0.8888889, 0.5555556];
+  var sum = 0;
 
-    for (var i = k + 1; i < n; i++) {
-      if (Math.abs(a[i][k]) > max) {
-        max = Math.abs(a[i][k]);
-        index = i;
-      }
-    } // Перестановка строк
-
-
-    if (max < eps) return undefined;
+  for (var i = 0; i < N; i++) {
+    var a2 = a + i * (b - a) / N;
+    var b2 = a + (i + 1) * (b - a) / N;
+    var ra = (b2 - a2) / 2;
+    var su = (a2 + b2) / 2;
+    var S = 0,
+        Q = void 0;
 
     for (var j = 0; j < n; j++) {
-      var _temp = a[k][j];
-      a[k][j] = a[index][j];
-      a[index][j] = _temp;
+      Q = su + ra * Xi[j];
+      S += Ci[j] * f(Q);
     }
 
-    var temp = C[k];
-    C[k] = C[index];
-    C[index] = temp; // Нормализация уравнений
-
-    for (var _i = k; _i < n; _i++) {
-      var _temp2 = a[_i][k];
-      if (Math.abs(_temp2) < eps) continue; // для нулевого коэффициента пропустить
-
-      for (var _j = 0; _j < n; _j++) {
-        a[_i][_j] = a[_i][_j] / _temp2;
-      }
-
-      C[_i] = C[_i] / _temp2;
-      if (_i == k) continue; // уравнение не вычитать само из себя
-
-      for (var _j2 = 0; _j2 < n; _j2++) {
-        a[_i][_j2] = a[_i][_j2] - a[k][_j2];
-      }
-
-      C[_i] = C[_i] - C[k];
-    }
-
-    k++;
-  } // обратная подстановка
-
-
-  for (k = n - 1; k >= 0; k--) {
-    x[k] = C[k];
-
-    for (var _i2 = 0; _i2 < k; _i2++) {
-      C[_i2] = C[_i2] - a[_i2][k] * x[k];
-    }
+    sum += ra * S;
   }
 
-  return x;
+  return sum; // 13.723492910917269
 };
-
-var _default = gaussMethod;
-exports.default = _default;
