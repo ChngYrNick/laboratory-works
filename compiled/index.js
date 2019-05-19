@@ -13,5 +13,5 @@ if (program.simpsonMethod) {
 }
 
 if (program.gaussMethod) {
-  console.log("Gauss method = ".concat(gaussMethod(1, 10)));
+  console.log("Gauss method = ".concat(gaussMethod(1, 10, 6)));
 }

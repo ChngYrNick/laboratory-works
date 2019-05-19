@@ -14,5 +14,5 @@ if (program.simpsonMethod) {
 }
 
 if (program.gaussMethod) {
-  console.log(`Gauss method = ${gaussMethod(1, 10)}`);
+  console.log(`Gauss method = ${gaussMethod(1, 10, 6)}`);
 }
