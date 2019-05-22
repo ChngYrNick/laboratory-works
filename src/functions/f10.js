@@ -1,3 +1,3 @@
-module.exports = function(x1, x2, x3) {
-  return -Math.sin(15 * x1);
+module.exports = function(x) {
+  return 4 * x[0];
 };

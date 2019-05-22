@@ -1,3 +1,3 @@
-module.exports = function(x1, x2, x3) {
-  return x2 * x3 + Math.pow(x2, 16);
+module.exports = function(x) {
+  return 2 * x[0];
 };
