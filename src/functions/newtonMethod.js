@@ -10,16 +10,16 @@ module.exports = function newtonMethod() {
     wx1,
     n = 0;
 
-  let x = [0.3, 0.7, 0.4];
+  let x = [1, 1, 1];
   // let x = new Array(F.length).fill(null).map(() => 0.5 - Math.random);
 
   const result = [];
 
   do {
-    fx = F.map(val => Math.round(val(...x) * 1000) / 1000);
+    fx = F.map(val => val(...x));
     wx = W.map(arr => arr.map(val => val(...x)));
 
-    wx1 = WX(wx).map(arr => arr.map(val => Math.round(val * 1000) / 1000));
+    wx1 = WX(wx);
 
     for (let i = 0; i < F.length; i++) {
       let dx = 0;
@@ -30,7 +30,6 @@ module.exports = function newtonMethod() {
 
       x[i] = x[i] - dx;
     }
-    x = x.map(val => Math.round(val * 1000) / 1000);
 
     n = Math.sqrt(F.reduce((acc, val) => acc + val(...x), 0));
 
