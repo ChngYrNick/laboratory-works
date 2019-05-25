@@ -1,12 +1,9 @@
 const program = require("commander");
-const newtonMethod = require("./functions/newtonMethod.js");
 
 program
   .version("0.0.1")
-  .description("Application for solving system of nonlinear equations")
-  .option("-n, --newton-method", "Newton method")
+  .description("Application for solving interpolation tasks")
+  .option("-f, --forward-interpolation", "Interpolation 'Forward'")
+  .option("-b, --backward-interpolation", "Interpolation 'Backward'")
+  .option("-l, --lagrange-method", "Lagrange method")
   .parse(process.argv);
-
-if (program.newtonMethod) {
-  console.log(newtonMethod());
-}
