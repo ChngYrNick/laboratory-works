@@ -7,6 +7,8 @@ program
   .option("-n, --newton-method", "Newton method")
   .parse(process.argv);
 
+let x = [0.5, 0.5];
+
 if (program.newtonMethod) {
-  console.log(newtonMethod());
+  console.log(newtonMethod(x));
 }

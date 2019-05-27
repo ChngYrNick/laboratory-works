@@ -1,3 +1,3 @@
 module.exports = function(x) {
-  return 2 * x[1];
+  return -Math.cos(x[1]);
 };

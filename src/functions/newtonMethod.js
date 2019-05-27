@@ -3,13 +3,11 @@ const F = require("./F.js");
 
 const eps = 0.001;
 
-module.exports = function newtonMethod() {
+module.exports = function newtonMethod(x) {
   let fx,
     wx,
     wx1,
     n = 0;
-
-  let x = [0.5, 0.5, 0.5];
 
   const result = [];
 

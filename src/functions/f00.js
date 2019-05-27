@@ -1,3 +1,3 @@
 module.exports = function(x) {
-  return 2 * x[0];
+  return Math.sin(x[0] + 1);
 };

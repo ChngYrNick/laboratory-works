@@ -1,21 +1,28 @@
 "use strict";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 var W = require("./W.js");
 
 var F = require("./F.js");
 
 var eps = 0.001;
 
-module.exports = function newtonMethod() {
+module.exports = function newtonMethod(x) {
   var fx,
       wx,
       wx1,
       n = 0;
-  var x = [0.5, 0.5, 0.5];
   var result = [];
   result.push({
     n: n,
-    x: [].concat(x)
+    x: _toConsumableArray(x)
   });
 
   do {
@@ -101,7 +108,7 @@ module.exports = function newtonMethod() {
     }, 0));
     result.push({
       n: n,
-      x: [].concat(x)
+      x: _toConsumableArray(x)
     });
   } while (n > eps);
 
