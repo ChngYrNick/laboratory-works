@@ -1,4 +1,5 @@
-export default function splineInterpolation(x, y, t, n) {
+export default function splineInterpolation(x, y, t) {
+  const n = x.length;
   // Инициализация массива сплайнов
   const splines = [];
   for (let i = 0; i < n; i++) {
@@ -43,10 +44,11 @@ export default function splineInterpolation(x, y, t, n) {
       (y[i] - y[i - 1]) / h_i;
   }
 
+  console.log(splines);
   let s;
   if (t <= splines[0].x)
     // Если x меньше точки сетки x[0] - пользуемся первым эл-тов массива
-    s = splines[0];
+    s = splines[1];
   else if (t >= splines[n - 1].x)
     // Если x больше точки сетки x[n - 1] - пользуемся последним эл-том массива
     s = splines[n - 1];
@@ -59,7 +61,7 @@ export default function splineInterpolation(x, y, t, n) {
       if (x <= splines[k].x) j = k;
       else i = k;
     }
-    s = splines[j - 1];
+    s = splines[j];
   }
 
   const dx = t - s.x;

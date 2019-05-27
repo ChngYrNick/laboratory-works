@@ -1,4 +1,5 @@
 import program from "commander";
+import splineInterpolation from "./functions/splineInterpolation";
 
 program
   .version("0.0.1")
@@ -6,8 +7,12 @@ program
   .option("-s, --spline-interpolation", "Spline interpolation")
   .parse(process.argv);
 
-const t = 3.5;
+const t = 1.5;
 
-const x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const x = [5, 7, 9, 8];
 
-const y = [-1, 2, 17, 50, 107, 194, 317, 482, 695, 962, 1289];
+const y = [9, 15, 8, 14];
+
+if (program.splineInterpolation) {
+  console.log("Result: " + splineInterpolation(x, y, t));
+}
