@@ -87,7 +87,7 @@ module.exports = function newtonMethod() {
       x[i] = x[i] - dx;
     }
 
-    n = Math.sqrt(F.reduce((acc, val) => acc + val(x), 0));
+    n = F.reduce((acc, val) => acc + val(x), 0);
 
     result.push({ n, x: [...x] });
   } while (n > eps);
