@@ -103,9 +103,9 @@ module.exports = function newtonMethod(x) {
       x[_i4] = x[_i4] - dx;
     }
 
-    n = Math.sqrt(F.reduce(function (acc, val) {
+    n = F.reduce(function (acc, val) {
       return acc + val(x);
-    }, 0));
+    }, 0);
     result.push({
       n: n,
       x: _toConsumableArray(x)
