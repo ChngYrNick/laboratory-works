@@ -5,3 +5,7 @@ program
   .description("Colloquium")
   .option("-t, --test", "Test")
   .parse(process.argv);
+
+if (program.test) {
+  console.log("Hello, World!");
+}
