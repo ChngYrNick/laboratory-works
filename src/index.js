@@ -14,5 +14,5 @@ const x = [5, 7, 9, 8];
 const y = [9, 15, 8, 14];
 
 if (program.splineInterpolation) {
-  console.log("Result: " + splineInterpolation(x, y, t));
+  console.table("Result: " + splineInterpolation(x, y, t));
 }

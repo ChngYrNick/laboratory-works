@@ -50,7 +50,6 @@ function splineInterpolation(x, y, t) {
     splines[_i3].b = _h_i * (2 * splines[_i3].c + splines[_i3 - 1].c) / 6 + (y[_i3] - y[_i3 - 1]) / _h_i;
   }
 
-  console.log(splines);
   var s;
   if (t <= splines[0].x) // Если x меньше точки сетки x[0] - пользуемся первым эл-тов массива
     s = splines[1];else if (t >= splines[n - 1].x) // Если x больше точки сетки x[n - 1] - пользуемся последним эл-том массива
@@ -66,6 +65,7 @@ function splineInterpolation(x, y, t) {
 
       s = splines[j];
     }
+  console.table(splines);
   var dx = t - s.x;
   return s.a + (s.b + (s.c / 2 + s.d * dx / 6) * dx) * dx; // Вычисляем значение сплайна в заданной точке по схеме Горнера
 }

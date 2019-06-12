@@ -13,5 +13,5 @@ var x = [5, 7, 9, 8];
 var y = [9, 15, 8, 14];
 
 if (_commander.default.splineInterpolation) {
-  console.log("Result: " + (0, _splineInterpolation.default)(x, y, t));
+  console.table("Result: " + (0, _splineInterpolation.default)(x, y, t));
 }
