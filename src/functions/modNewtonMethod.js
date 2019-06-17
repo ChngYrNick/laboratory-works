@@ -17,11 +17,11 @@ module.exports = function newtonMethod(x, eps) {
   }
   result.push(obj);
 
+  wx = W.map(arr => arr.map(val => val(x)));
+  wx1 = gaussSOLE(wx);
+
   do {
     fx = F.map(val => val(x));
-    wx = W.map(arr => arr.map(val => val(x)));
-
-    wx1 = gaussSOLE(wx);
 
     for (let i = 0; i < F.length; i++) {
       let dx = 0;

@@ -22,17 +22,17 @@ module.exports = function newtonMethod(x, eps) {
   }
 
   result.push(obj);
+  wx = W.map(function (arr) {
+    return arr.map(function (val) {
+      return val(x);
+    });
+  });
+  wx1 = gaussSOLE(wx);
 
   do {
     fx = F.map(function (val) {
       return val(x);
     });
-    wx = W.map(function (arr) {
-      return arr.map(function (val) {
-        return val(x);
-      });
-    });
-    wx1 = gaussSOLE(wx);
 
     for (var _i = 0; _i < F.length; _i++) {
       var dx = 0;
