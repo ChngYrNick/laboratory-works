@@ -35,5 +35,5 @@ const graph = [
 const s = 0;
 
 if (program.shortestHamiltonianCycle) {
-  console.log(shortestHamiltonianCycle(graph, s));
+  console.log(`Shortest path weight: ${shortestHamiltonianCycle(graph, s)}`);
 }
