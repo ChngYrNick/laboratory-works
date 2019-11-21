@@ -1,7 +1,6 @@
 import program from 'commander';
 
 import shortestHamiltonianCycle from './functions/shortestHamiltonianCycle';
-import floydMethod from './functions/floydMethod';
 
 program
   .version('0.0.1')
@@ -10,21 +9,21 @@ program
   .option('-f, --floyd-method', 'Floyd method')
   .parse(process.argv);
 
-const graph = [
-  [0, 10, 15, 20],
-  [10, 0, 35, 25],
-  [15, 35, 0, 30],
-  [20, 25, 30, 0]
-];
-
 // const graph = [
-//   [0, 2, 0, 0, 4, 2],
-//   [2, 0, 3, 0, 0, 3],
-//   [0, 3, 0, 2, 0, 1],
-//   [0, 0, 2, 0, 3, 2],
-//   [4, 0, 0, 3, 0, 1],
-//   [2, 3, 1, 2, 1, 0]
+//   [0, 10, 15, 20],
+//   [10, 0, 35, 25],
+//   [15, 35, 0, 30],
+//   [20, 25, 30, 0]
 // ];
+
+const graph = [
+  [0, 2, 0, 0, 4, 2],
+  [2, 0, 3, 0, 0, 3],
+  [0, 3, 0, 2, 0, 1],
+  [0, 0, 2, 0, 3, 2],
+  [4, 0, 0, 3, 0, 1],
+  [2, 3, 1, 2, 1, 0]
+];
 
 // const graph = [
 //   [0, 20, 35, 42],
@@ -37,8 +36,4 @@ const s = 0;
 
 if (program.shortestHamiltonianCycle) {
   console.log(shortestHamiltonianCycle(graph, s));
-}
-
-if (program.floydMethod) {
-  console.log(floydMethod(graph));
 }
