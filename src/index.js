@@ -1,27 +1,44 @@
 import program from 'commander';
 
-import simplexMethod from './functions/simplexMethod';
+import shortestHamiltonianCycle from './functions/shortestHamiltonianCycle';
+import floydMethod from './functions/floydMethod';
 
 program
   .version('0.0.1')
-  .description('Colloquium')
-  .option('-t, --test', 'Test')
+  .description('Program that searching shortest Hamiltonian cycle')
+  .option('-s, --shortest-hamiltonian-cycle', 'Shortest Hamiltonian cycle')
+  .option('-f, --floyd-method', 'Floyd method')
   .parse(process.argv);
 
-const F = [-2, 1];
+// const graph = [
+//   [0, 10, 15, 20],
+//   [10, 0, 35, 25],
+//   [15, 35, 0, 30],
+//   [20, 25, 30, 0]
+// ];
 
-const extr = 'min';
+// const graph = [
+//   [0, 2, 0, 0, 4, 2],
+//   [2, 0, 3, 0, 0, 3],
+//   [0, 3, 0, 2, 0, 1],
+//   [0, 0, 2, 0, 3, 2],
+//   [4, 0, 0, 3, 0, 1],
+//   [2, 3, 1, 2, 1, 0]
+// ];
 
-const A = [
-  [2, 1],
-  [1, 1],
-  [-3, 2]
+const graph = [
+  [0, 20, 35, 42],
+  [20, 0, 34, 30],
+  [35, 34, 0, 12],
+  [42, 30, 12, 0]
 ];
 
-const B = [8, 6, 3];
+const s = 0;
 
-const equalSigns = ['<=', '<=', '>='];
+if (program.shortestHamiltonianCycle) {
+  console.log(shortestHamiltonianCycle(graph, s));
+}
 
-if (program.test) {
-  simplexMethod(F, extr, A, B, equalSigns);
+if (program.floydMethod) {
+  console.log(floydMethod(graph));
 }
