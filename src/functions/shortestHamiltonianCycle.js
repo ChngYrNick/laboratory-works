@@ -38,6 +38,8 @@ export default function shortestHamiltonianCycle(graph, s) {
   // Змінна з мінімальною вагою шляху
   let minPath = Infinity;
 
+  let isZero = false;
+
   do {
     // Змінна з поточною вагою шляху
     let currentPathWeight = 0;
@@ -45,10 +47,23 @@ export default function shortestHamiltonianCycle(graph, s) {
     // Обчислення поточної ваги шляху
     let k = s;
     for (let i = 0; i < vertex.length; i++) {
+      if (!graph[k][vertex[i]]) {
+        isZero = true;
+        break;
+      }
       currentPathWeight += graph[k][vertex[i]];
       k = vertex[i];
     }
+    if (isZero || !graph[k][s]) {
+      isZero = false;
+      continue;
+    }
+
     currentPathWeight += graph[k][s];
+
+    if (currentPathWeight === 13) {
+      console.log(vertex);
+    }
 
     // За виконанням умови змінюємо мінімум
     minPath = currentPathWeight < minPath ? currentPathWeight : minPath;
